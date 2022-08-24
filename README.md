@@ -1,4 +1,6 @@
 # Food_delivery_application_customer
+![image](https://user-images.githubusercontent.com/89952061/186397812-08ab2316-c16a-4845-893e-fa6dddb73d11.png)
+
 - 고객용 음식 배달 어플리케이션
 - fastify 프레임워크 활용
 
