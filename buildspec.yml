@@ -15,5 +15,7 @@ phases:
   post_build:
     commands:
       - echo Buile Phase >> Build completed on `date`
-files:
-  discard-paths: yes
+artifacts:
+  files:
+    - '**/*'
+  base-directory: client/build
