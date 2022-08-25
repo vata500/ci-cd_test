@@ -16,4 +16,4 @@ phases:
     commands:
       - echo Buile Phase >> Build completed on `date`
 files:
-  - '**/*'
+  discard-paths: yes
