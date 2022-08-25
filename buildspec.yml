@@ -15,5 +15,5 @@ phases:
   post_build:
     commands:
       - echo Buile Phase >> Build completed on `date`
-  files:
-    - '**/*'
+files:
+  - '**/*'
