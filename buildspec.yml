@@ -7,6 +7,7 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
+      - pwd
   build:
     commands:
       - echo Buile Phase >> Build started on `date`
