@@ -1,112 +1,70 @@
-# Food_delivery_application_customer
-![image](https://user-images.githubusercontent.com/89952061/186397812-08ab2316-c16a-4845-893e-fa6dddb73d11.png)
+# Getting Started with Create React App
 
-- 고객용 음식 배달 어플리케이션
-- fastify 프레임워크 활용
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### 주요 directory
-- 상위 repo는 백엔드로 구성
-- customer_frontend : react로 구현된 고객전용 정적 웹페이지
-- mongodb_set : docker 이미지를 활용하여 구성되는 mongodb 데이터베이스
+## Available Scripts
 
-### 백엔드
-![image](https://user-images.githubusercontent.com/89952061/186393384-b99da795-b337-463e-a4d8-0a567c30ad00.png)
-- Github action을 활용하여 build, ECS 배포 자동화
-```
-# # /.github/workflows/main.yml
+In the project directory, you can run:
 
-name: Deploy to Amazon ECS
+### `yarn start`
 
-on:
-  push:
-    branches:
-      - "jh"
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-env:
-  AWS_REGION: us-east-1                  # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: project2-ecr           # set this to your Amazon ECR repository name
-  ECS_SERVICE: was-service                 # set this to your Amazon ECS service name
-  ECS_CLUSTER: project2-cluster                # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: ./project2-was-task.json # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: p2-was-container           # set this to the name of the container in the
-                                               # containerDefinitions section of your task definition
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-permissions:
-  contents: read
+### `yarn test`
 
-jobs:
-...
-```
-- Task Definition을 바탕으로 Task를 생성
-- 지정된 ALB를 통해 Deploy
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### 프론트엔드
-![image](https://user-images.githubusercontent.com/89952061/186392926-c7c6e7f7-4eb3-4e1b-9d5e-777d7343164a.png)
-- CodePipeline을 통해 자동 build, artifact to AWS S3 Bucket
-```
-# /buildspec.yml
-version: 0.2
+### `yarn build`
 
-phases:
-  install:
-    runtime-versions:
-      nodejs: 12
-  pre_build:
-    commands:
-      - cd customer_frontend
-  build:
-    commands:
-      - echo Buile Phase >> Build started on `date`
-      - npm install
-      - npm run build
-  post_build:
-    commands:
-      - echo Buile Phase >> Build completed on `date`
-artifacts:
-  files:
-    - '**/*'
-  base-directory: customer_frontend/build
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- Github action을 활용하여 자동 build, artifact to AWS S3 Bucket(추가)
-```
-# customer_frontend/.github/workflows/main.yml
-name: workflow for S3 Deploy
-on: [push]
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    steps:
-        - uses: actions/checkout@v3
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-        - name: Install dependencies
-          run: npm install
+### `yarn eject`
 
-        - name: Build
-          run: CI='' npm run build
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-        - name: Deploy
-          uses: reggionick/s3-deploy@v3
-          with:
-            folder: build
-            bucket: ${{ secrets.S3_BUCKET }}
-            bucket-region: ${{ secrets.S3_BUCKET_REGION }}
-            invalidation: /
-            delete-removed: true
-            no-cache: true
-            private: false
-            filesToInclude: ".*/*,*/*,**"
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Learn More
 
-### 데이터베이스
-- Mongodb NoSQL
-- 도커 이미지(mongo)를 활용하여 구성
-- mongo-init.js을 통해 기본 collection 설정
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
