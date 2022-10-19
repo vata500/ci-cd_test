@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-import App from './App';
+import View from './View'
+import Write from './Write'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<View />} />
+      <Route path="new" element={<Write />} />
+      <Route path="article/:id/edit" element={<Write />} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
