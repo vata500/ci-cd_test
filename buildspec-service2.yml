@@ -6,7 +6,7 @@ phases:
       nodejs: 12
   pre_build:
     commands:
-      - cd service1
+      - cd service2
   build:
     commands:
       - echo Buile Phase >> Build started on `date`
@@ -18,4 +18,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: service1/build
+  base-directory: service2/build
