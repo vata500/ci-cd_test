@@ -19,6 +19,6 @@ jobs:
     - name: Start CodePipeline
       uses: moia-oss/aws-codepipeline-trigger@v1
       with:
-       pipeline: service1-test
+       pipeline: service2-test
        wait: true # optional (default: false)
        follow-codebuild: true # optional (default: false)
