@@ -18,4 +18,3 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: service1/build
